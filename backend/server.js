@@ -3,6 +3,7 @@ const colors = require("colors");
 const dotenv = require("dotenv").config();
 const PORT = process.env.PORT || 5000;
 const userRoutes = require("./routes/userRoutes");
+const ticketRoutes = require("./routes/ticketRoutes");
 const { errorHandler } = require("./middleware/errorMiddleware");
 const connectDB = require("./config/db");
 
@@ -20,6 +21,7 @@ app.get("/", (req, res) => {
 
 //Routes
 app.use("/api/users", userRoutes);
+app.use("/api/tickets", ticketRoutes);
 
 app.use(errorHandler);
 

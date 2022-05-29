@@ -7,7 +7,6 @@ const userRoutes = require("./routes/userRoutes");
 const ticketRoutes = require("./routes/ticketRoutes");
 const { errorHandler } = require("./middleware/errorMiddleware");
 const connectDB = require("./config/db");
-const { path } = require("express/lib/application");
 
 //Connect to db
 connectDB();

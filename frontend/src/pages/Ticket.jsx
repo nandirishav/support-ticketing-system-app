@@ -144,6 +144,8 @@ function Ticket() {
         <NoteItem key={note._id} note={note} />
       ))}
 
+      {notes.length === 0 && <h4>No Notes found</h4>}
+
       {ticket.status !== "closed" && (
         <button className="btn btn-block btn-danger" onClick={onTicketClose}>
           Close Ticket

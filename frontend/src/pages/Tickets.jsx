@@ -41,6 +41,9 @@ function Tickets() {
         {tickets.map((ticket) => {
           return <TicketItem key={ticket._id} ticket={ticket} />;
         })}
+        {tickets.length === 0 && (
+          <h4 style={{ color: "red", textAlign: "left" }}>No Tickets found</h4>
+        )}
       </div>
     </>
   );

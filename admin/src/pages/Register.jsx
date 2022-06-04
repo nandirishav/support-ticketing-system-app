@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { FaUser } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { register, reset } from "../features/auth/authSlice";
+import Spinner from "../components/Spinner";
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -9,11 +12,29 @@ function Register() {
     email: "",
     password: "",
     password2: "",
+    isAdmin: true,
   });
 
-  const { name, email, password, password2 } = formData;
+  const { name, email, password, password2, isAdmin } = formData;
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const { user, isLoading, isError, isSuccess, message } = useSelector(
+    (state) => state.auth
+  );
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(message);
+    }
+
+    //Redirect when logged in
+    if (isSuccess || user) {
+      navigate("/");
+    }
+    dispatch(reset());
+  }, [isError, isSuccess, user, message, navigate, dispatch]);
 
   const onChange = (e) => {
     setFormData((prevState) => ({
@@ -31,10 +52,15 @@ function Register() {
         name,
         email,
         password,
+        isAdmin,
       };
-      console.log(userData);
+      dispatch(register(userData));
     }
   };
+
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   return (
     <>

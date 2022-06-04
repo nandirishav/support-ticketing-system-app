@@ -8,7 +8,7 @@ const User = require("../models/userModel");
 //@route    /api/users
 // @access  Public
 const registerUser = asyncHandler(async (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, email, password, isAdmin } = req.body;
 
   //validation
   if (!name || !email || !password) {
@@ -32,6 +32,7 @@ const registerUser = asyncHandler(async (req, res) => {
     name: name,
     email: email,
     password: hashedPassword,
+    isAdmin: isAdmin,
   });
 
   if (user) {
@@ -39,6 +40,7 @@ const registerUser = asyncHandler(async (req, res) => {
       _id: user._id,
       name: user.name,
       email: user.email,
+      isAdmin: user.isAdmin,
       token: generateUserToken(user._id),
     });
   } else {
@@ -51,7 +53,7 @@ const registerUser = asyncHandler(async (req, res) => {
 //@route    /api/users/login
 // @access  Public
 const loginUser = asyncHandler(async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password, isAdmin } = req.body;
 
   const user = await User.findOne({
     email: email,
@@ -63,6 +65,7 @@ const loginUser = asyncHandler(async (req, res) => {
       _id: user._id,
       name: user.name,
       email: user.email,
+      isAdmin: user.isAdmin,
       token: generateUserToken(user._id),
     });
   } else {

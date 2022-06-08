@@ -22,6 +22,16 @@ const ticketSchema = mongoose.Schema(
       enum: ["new", "open", "closed"],
       default: "new",
     },
+    assignedTo: {
+      type: String,
+      required: false,
+      default: "unassigned",
+    },
+    lastUpdatedBy: {
+      type: String,
+      required: false,
+    },
+    dueDate: { type: Date },
   },
   {
     timestamps: true,

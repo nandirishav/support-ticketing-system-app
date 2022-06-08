@@ -8,6 +8,7 @@ import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import NotFoundPage from "./pages/NotFoundPage";
 import UserList from "./pages/UserList";
+import GetTickets from "./pages/GetTickets";
 
 function App() {
   return (
@@ -22,6 +23,9 @@ function App() {
             </Route>
             <Route path="/users" element={<PrivateRoute />}>
               <Route path="/users" element={<UserList />} />
+            </Route>
+            <Route path="/getTickets/:type" element={<PrivateRoute />}>
+              <Route path="/getTickets/:type" element={<GetTickets />} />
             </Route>
             {/* <Route path="/users">
             <UserList />
